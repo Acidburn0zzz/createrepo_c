@@ -370,8 +370,8 @@ main(int argc, char **argv)
     gchar *in_repo      = NULL;  // path/to/repo/repodata/
     gchar *out_dir      = NULL;  // path/to/out_repo/
     gchar *out_repo     = NULL;  // path/to/out_repo/repodata/
-    gchar *tmp_out_repo = NULL;  // usually path/to/out_repo/.repodata/
-    gchar *lock_dir     = NULL;  // path/to/out_repo/.repodata/
+    gchar *tmp_out_repo = NULL;  // usually path/to/out_repo/tmp_repodata/
+    gchar *lock_dir     = NULL;  // path/to/out_repo/tmp_repodata/
 
     if (cmd_options->basedir && !g_str_has_prefix(argv[1], "/")) {
         gchar *tmp = cr_normalize_dir_path(argv[1]);

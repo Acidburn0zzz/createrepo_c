@@ -48,7 +48,7 @@ extern "C" {
  *    This handler assures that the cleanup function that is hooked on exit
  *    gets called.
  *
- * @param lock_dir      Dir that serves as lock (".repodata/")
+ * @param lock_dir      Dir that serves as lock ("tmp_repodata/")
  * @param tmp_out_repo  Dir that is really used for repodata generation
  *                      (usually exactly the same as lock dir if not
  *                      --ignore-lock is specified). Could be NULL.
@@ -75,20 +75,20 @@ cr_unblock_terminating_signals(GError **err);
 
 /**
  * This function does:
- * - Tries to create repo/.repodata/ dir.
+ * - Tries to create repo/tmp_repodata/ dir.
  * - If it doesn't exists, it's created and function returns TRUE.
  * - If it exists and ignore_lock is FALSE, returns FALSE and err is set.
  * - If it exists and ignore_lock is TRUE it:
- *  - Removes the existing .repodata/ dir and all its content
+ *  - Removes the existing tmp_repodata/ dir and all its content
  *  - Creates (empty) new one (just as a lock dir - place holder)
- *  - Creates .repodata.pid.datetime.usec/ that should be used for
+ *  - Creates tmp_repodata.pid.datetime.usec/ that should be used for
  *    repodata generation
  *
  * @param repo_dir          Path to repo (a dir that contains repodata/ subdir)
- * @param ignore_lock       Ignore existing .repodata/ dir - remove it and
+ * @param ignore_lock       Ignore existing tmp_repodata/ dir - remove it and
  *                          create a new one.
  * @param lock_dir          Location to store path to a directory used as
- *                          a lock. Always repodir+"/.repodata/".
+ *                          a lock. Always repodir+"/tmp_repodata/".
  *                          Even if FALSE is returned, the content of this
  *                          variable IS DEFINED.
  * @param tmp_repodata_dir  Location to store a path to a directory used as

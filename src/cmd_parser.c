@@ -195,11 +195,11 @@ static GOptionEntry cmd_entries[] =
 static GOptionEntry expert_entries[] =
 {
     { "ignore-lock", 0, 0, G_OPTION_ARG_NONE, &(_cmd_options.ignore_lock),
-      "Expert (risky) option: Ignore an existing .repodata/. "
-      "(Remove the existing .repodata/ and create an empty new one "
+      "Expert (risky) option: Ignore an existing tmp_repodata/. "
+      "(Remove the existing tmp_repodata/ and create an empty new one "
       "to serve as a lock for other createrepo intances. For the repodata "
       "generation, a different temporary dir with the name in format "
-      "\".repodata.time.microseconds.pid/\" will be used). "
+      "\"tmp_repodata.time.microseconds.pid/\" will be used). "
       "NOTE: Use this option on your "
       "own risk! If two createrepos run simultaneously, then the state of the "
       "generated metadata is not guaranted - it can be inconsistent and wrong.",

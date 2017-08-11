@@ -29,14 +29,14 @@
 #include "cleanup.h"
 
 
-char *global_lock_dir     = NULL;  // Path to .repodata/ dir that is used as a lock
+char *global_lock_dir     = NULL;  // Path to tmp_repodata/ dir that is used as a lock
 char *global_tmp_out_repo = NULL;  // Path to temporary repodata directory,
                                    // if NULL that it's same as
                                    // the global_lock_dir
 
 /**
  * Clean up function called on normal program termination.
- * It removes temporary .repodata/ directory that servers as a lock
+ * It removes temporary tmp_repodata/ directory that servers as a lock
  * for other createrepo[_c] processes.
  * This functions acts only if exit status != EXIST_SUCCESS.
  *
@@ -190,7 +190,7 @@ cr_lock_repo(const gchar *repo_dir,
     _cleanup_free_ gchar *lock_dir = NULL;
     _cleanup_error_free_ GError *tmp_err = NULL;
 
-    lock_dir = g_build_filename(repo_dir, ".repodata/", NULL);
+    lock_dir = g_build_filename(repo_dir, "tmp_repodata/", NULL);
     *lock_dir_p = g_strdup(lock_dir);
 
     if (g_mkdir(lock_dir, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)) {
@@ -214,8 +214,8 @@ cr_lock_repo(const gchar *repo_dir,
         // The next section takes place only if the --ignore-lock is used
         // Ugly, but user wants it -> it's his fault if something gets broken
 
-        // Remove existing .repodata/
-        g_debug("(--ignore-lock enabled) Let's remove the old .repodata/");
+        // Remove existing tmp_repodata/
+        g_debug("(--ignore-lock enabled) Let's remove the old tmp_repodata/");
         if (cr_rm(lock_dir, CR_RM_RECURSIVE, NULL, &tmp_err)) {
             g_debug("(--ignore-lock enabled) Removed: %s", lock_dir);
         } else {
@@ -244,7 +244,7 @@ cr_lock_repo(const gchar *repo_dir,
         _cleanup_free_ gchar *tmp_repodata_dir = NULL;
         _cleanup_free_ gchar *tmp = NULL;
 
-        tmp = g_build_filename(repo_dir, ".repodata.", NULL);
+        tmp = g_build_filename(repo_dir, "tmp_repodata.", NULL);
         tmp_repodata_dir = cr_append_pid_and_datetime(tmp, "/");
 
         if (g_mkdir(tmp_repodata_dir, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH)) {

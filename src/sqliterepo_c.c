@@ -713,8 +713,8 @@ generate_sqlite_from_xml(const gchar *path,
     _cleanup_free_ gchar *in_repo      = NULL;  // path/to/repo/repodata/
     _cleanup_free_ gchar *out_dir      = NULL;  // path/to/out_repo/
     _cleanup_free_ gchar *out_repo     = NULL;  // path/to/out_repo/repodata/
-    _cleanup_free_ gchar *tmp_out_repo = NULL;  // usually path/to/out_repo/.repodata/
-    _cleanup_free_ gchar *lock_dir     = NULL;  // path/to/out_repo/.repodata/
+    _cleanup_free_ gchar *tmp_out_repo = NULL;  // usually path/to/out_repo/tmp_repodata/
+    _cleanup_free_ gchar *lock_dir     = NULL;  // path/to/out_repo/tmp_repodata/
     gboolean ret;
     GError *tmp_err = NULL;
 
@@ -730,8 +730,8 @@ generate_sqlite_from_xml(const gchar *path,
     in_repo         = g_build_filename(in_dir, "repodata/", NULL);
     out_dir         = g_strdup(in_dir);
     out_repo        = g_strdup(in_repo);
-    lock_dir        = g_build_filename(out_dir, ".repodata/", NULL);
-    tmp_out_repo    = g_build_filename(out_dir, ".repodata/", NULL);
+    lock_dir        = g_build_filename(out_dir, "tmp_repodata/", NULL);
+    tmp_out_repo    = g_build_filename(out_dir, "tmp_repodata/", NULL);
 
     // Block signals that terminates the process
     if (!cr_block_terminating_signals(err))

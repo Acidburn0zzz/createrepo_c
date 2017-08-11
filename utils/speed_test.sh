@@ -68,7 +68,7 @@ function clear_cache {
 function run {
     # Run - entire metadata from scratch
 
-    rm -rf "$REPO"/.repodata # Just in case previous run of createrepo_c failed
+    rm -rf "$REPO"/tmp_repodata # Just in case previous run of createrepo_c failed
 
     rm -rf "$REPO"/repodata
     echo -e "\n\$ createrepo_c $1 $REPO"
@@ -86,7 +86,7 @@ function run {
 function dirty_run {
     # Run - repodata already exists in place
 
-    rm -rf "$REPO"/.repodata # Just in case previous run of createrepo_c failed
+    rm -rf "$REPO"/tmp_repodata # Just in case previous run of createrepo_c failed
 
     # Prepare metadata
     rm -rf "$REPO"/repodata
@@ -145,4 +145,4 @@ dirty_run "--update --no-database"
 # Final clean up
 
 rm -rf "$REPO"/repodata
-rm -rf "$REPO"/.repodata
+rm -rf "$REPO"/tmp_repodata

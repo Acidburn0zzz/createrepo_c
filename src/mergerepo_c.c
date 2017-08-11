@@ -299,7 +299,7 @@ check_arguments(struct CmdOptions *options)
     }
 
     options->out_repo = g_strconcat(options->out_dir, "repodata/", NULL);
-    options->tmp_out_repo = g_strconcat(options->out_dir, ".repodata/", NULL);
+    options->tmp_out_repo = g_strconcat(options->out_dir, "tmp_repodata/", NULL);
 
     // Process repos
     x = 0;
